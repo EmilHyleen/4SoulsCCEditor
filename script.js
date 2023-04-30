@@ -1,14 +1,38 @@
+// Global canvas object
 const Canvas = document.querySelector('canvas');
 
-// Pixels
-const CWidth = 1312;
-const CHeight = 962;
+// const CardAspectRatio = 1.3858;
+const CardAspectRatio = 0.7216;
+
+// Height depends on width
+// const CanvasWidth = window.innerWidth / 3;
+// const CanvasHeight = CanvasWidth * CardAspectRatio;
+
+const CanvasHeight = window.innerHeight;
+const CanvasWidth = CanvasHeight * CardAspectRatio;
 
 function LoadImage(url)
 {
-    // Create and load an image object. This is not attached to the DOM and is not part of the page.
+    // Create and load an image object. 
+    // This is not attached to the DOM and is not part of the page.
     var image = new Image();
+    console.log(`src: ${image.src}`);
     image.src = url;
+    console.log(`src: ${image.src}`);
+    return image;
+}
+
+// Main use for drawing the scaled card with proper aspect ratio
+function LoadAndDrawImageScaled(url)
+{
+    var image = LoadImage(url);
+    
+    image.onload = function()
+    {
+        var ctx = Canvas.getContext("2d");
+        ctx.drawImage(image, 0, 0, CanvasWidth, CanvasHeight);
+    }
+
     return image;
 }
 
@@ -16,7 +40,6 @@ function LoadAndDrawImage(url)
 {
     var image = LoadImage(url);
 
-    // When the image has loaded, draw it to the canvas
     image.onload = function()
     {
         var ctx = Canvas.getContext("2d");
@@ -26,26 +49,64 @@ function LoadAndDrawImage(url)
     return image;
 }
 
-function DrawImageScaled(img) 
+const Isaac = LoadImage("isaac.png");
+const Character_UI = LoadAndDrawImageScaled("assets/character/Blank_Character.png");
+
+function DrawInternal()
 {
     var ctx = Canvas.getContext("2d");
-    var hRatio = Canvas.width  / img.width    ;
-    var vRatio =  Canvas.height / img.height  ;
-    var ratio  = Math.min ( hRatio, vRatio );
-    var centerShift_x = ( Canvas.width - img.width*ratio ) / 2;
-    var centerShift_y = ( Canvas.height - img.height*ratio ) / 2;  
-    ctx.clearRect(0,0,Canvas.width, Canvas.height);
-    ctx.drawImage(img, 0,0, img.width, img.height,
-                      centerShift_x,centerShift_y,img.width*ratio, img.height*ratio);  
-}
 
-const Base_Character_Img = LoadImage("assets/character/Base_Character.png");
+    // background art
+    ctx.drawImage(Isaac, 30, 0);
+
+    // card UI
+    ctx.drawImage(Character_UI, 0, 0, CanvasWidth, CanvasHeight);
+
+    // card name
+    var cardname = document.getElementById('card-name').value;
+    ctx.font = "40px EdmundMcMillen";
+    ctx.textAlign = "center";
+    ctx.fillText(cardname, PercentToCanvasWidth(50), PercentToCanvasHeight(9));
+
+    // character health
+    ctx.font = "lighter 70px EdmundMcMillen";
+    var charhealth = document.getElementById('character-health').value;
+    ctx.fillText(charhealth, PercentToCanvasWidth(44), PercentToCanvasHeight(64.5));
+
+    // character attack
+    var charattack = document.getElementById('character-attack').value;
+    ctx.fillText(charattack, PercentToCanvasWidth(66), PercentToCanvasHeight(64.5));
+
+}
 
 // When DOM is loaded, setup canvas details
 window.addEventListener("DOMContentLoaded", function()
 {
-    Canvas.width  = CWidth; 
-    Canvas.height = CHeight;
+    Canvas.width  = CanvasWidth; 
+    Canvas.height = CanvasHeight;
 
-    DrawImageScaled(Base_Character_Img);
+    DrawInternal();
 });
+
+window.onload=function()
+{
+    function Draw(event)
+    {
+        DrawInternal();
+    }
+    window.addEventListener("keyup", Draw, true);
+    window.addEventListener("mouseup", Draw, true);
+    Draw();
+}
+
+function PercentToCanvasWidth(percent)
+{
+    var cPercent = Canvas.width / 100;
+    return cPercent * percent;
+}
+
+function PercentToCanvasHeight(percent)
+{
+    var cPercent = Canvas.height / 100;
+    return cPercent * percent;
+}

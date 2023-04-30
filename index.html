@@ -21,19 +21,45 @@
         </div>
     </section>
     <section id="right">
-        <div class="card-name">
-            <label for="card-name">Name</label>
-            <input type="text" name="card-name" id="card-name">
-        </div>
+
         <div class="card-type">
             <label for="card-type">Card Type</label>
             <select id="card-type-selector" name="card-type">
                 <option value="character">Character</option>
-                <option value="monster">Monster</option>
-                <option value="boss">Boss</option>
-                <option value="loot">Loot</option>
-                <option value="treasure">Treasure</option>
+                <option value="monster" disabled>Monster</option>
+                <option value="boss" disabled>Boss</option>
+                <option value="loot" disabled>Loot</option>
+                <option value="treasure" disabled>Treasure</option>
             </select>
+        </div>
+
+        <div class="card-name">
+            <label for="card-name">Name</label>
+            <input type="text" name="card-name" id="card-name" value="ISAAC">
+        </div>
+        
+        <div class="character-health">
+            <label for="character-health">Health</label>
+            <input type="number" name="character-health" id="character-health" value="2" min="0" max="9">
+        </div>
+        
+        <div class="character-attack">
+            <label for="character-attack">Attack</label>
+            <input type="number" name="character-attack" id="character-attack" value="1" min="0" max="9">
+        </div>
+
+        <div class="character-effect">
+            <label for="character-effect">Effect</label>
+            <textarea id="character-effect" name="character-effect" rows="4" cols="50">
+            </textarea>
+
+            <label for="default-effect-check" >Default?</label>
+            <input type="checkbox" name="default-effect-check" id="default-effect-check" checked>
+        </div>
+
+        <div class="eternal-name">
+            <label for="eternal-name">Eternal</label>
+            <input type="text" name="eternal-name" id="eternal-name" value="D6">
         </div>
     </section>
 </body>

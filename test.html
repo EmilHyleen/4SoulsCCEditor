@@ -1,15 +1,31 @@
+<!--from  w  ww .j  a  va 2  s.c  o m-->
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
-    <title>Canvas Testing</title>
+<style type='text/css'>
+canvas {
+   border:1px solid red;
+}
+</style>
+<script type='text/javascript'>//<![CDATA[ 
+window.onload=function(){
+        function draw(event) {
+            var canvas = document.getElementById("canvas");
+            var ctx = canvas.getContext("2d");
+            var text = document.getElementById('item').value
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = "#3e3e3e";
+            ctx.textAlign = "center";
+            ctx.font = "16px Arial";
+            ctx.fillText(text, 50, 50);
+        }
+        window.addEventListener("keyup", draw, true);
+}//]]>  
+</script>
 </head>
-<body style="margin:0">
-    <canvas id="canvas" style="border:1px solid #000000"></canvas>
-    <script type="text/javascript" src="test.js"></script>
+<body>
+  <canvas id="canvas" width=300 height=300></canvas>
+<br/>
+<input type="text" id="item">
 </body>
 </html>
