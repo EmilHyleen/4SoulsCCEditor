@@ -32,12 +32,35 @@
                 <option value="treasure" disabled>Treasure</option>
             </select>
         </div>
-
+        <br>
         <div class="card-name">
             <label for="card-name">Name</label>
             <input type="text" name="card-name" id="card-name" value="ISAAC">
         </div>
-        
+        <br>
+        <div class="card-image">
+            <label>Image File:</label><br/>
+            <input type="file" id="imageLoader" name="imageLoader"/>
+            <br>
+            <label for="scaleSlider">Scale</label>
+            <input type="range" min="1" max="200" value="100" class="scaleSlider" id="scaleSlider">
+            <br>
+            <label for="alignXSlider">Align X</label>
+            <input type="range" min="-300" max="300" value="0" class="alignXSlider" id="alignXSlider">
+            <br>
+            <label for="alignYSlider">Align Y</label>
+            <input type="range" min="-300" max="300" value="0" class="alignYSlider" id="alignYSlider">
+            <br>
+            <label for="center-image-check-x">Center Image X</label>
+            <input type="checkbox" name="center-image-check-x" id="center-image-check-x" checked>
+            <br>
+            <label for="center-image-check-y">Center Image Y</label>
+            <input type="checkbox" name="center-image-check-y" id="center-image-check-y" checked>
+            <br>
+            <label for="scale-to-canvas-check">Scale to Canvas</label>
+            <input type="checkbox" name="scale-to-canvas-check" id="scale-to-canvas-check">
+        </div>
+        <br>
         <div class="character-health">
             <label for="character-health">Health</label>
             <input type="number" name="character-health" id="character-health" value="2" min="0" max="9">
@@ -49,17 +72,20 @@
         </div>
 
         <div class="character-effect">
-            <label for="character-effect">Effect</label>
-            <textarea id="character-effect" name="character-effect" rows="4" cols="50">
-            </textarea>
-
+            <br>
+            <label for="character-effect-r1">Effect</p>
+            <input style="display: block;" type="text" id="character-effect-r1" name="character-effect-r1">
+            <input style="display: block;" type="text" id="character-effect-r2" name="character-effect-r2">
+            <input style="display: block;" type="text" id="character-effect-r3" name="character-effect-r3">
+            <input style="display: block;" type="text" id="character-effect-r4" name="character-effect-r4">
+            
             <label for="default-effect-check" >Default?</label>
             <input type="checkbox" name="default-effect-check" id="default-effect-check" checked>
         </div>
-
+        <br>
         <div class="eternal-name">
             <label for="eternal-name">Eternal</label>
-            <input type="text" name="eternal-name" id="eternal-name" value="D6">
+            <input type="text" name="eternal-name" id="eternal-name" value="the d6">
         </div>
     </section>
 </body>
