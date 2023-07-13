@@ -207,7 +207,9 @@ window.onload=function()
         UpdateInternal();
     }
     window.addEventListener("keyup", Update, true);
+    window.addEventListener("keypress", Update, true);
     window.addEventListener("mouseup", Update, true);
+    window.addEventListener("input", Update, true);
     Update();
 
     function Draw(event)
@@ -215,7 +217,9 @@ window.onload=function()
         DrawInternal();
     }
     window.addEventListener("keyup", Draw, true);
+    window.addEventListener("keypress", Draw, true);
     window.addEventListener("mouseup", Draw, true);
+    window.addEventListener("input", Draw, true);
 
     // FIXME: canvas is not updating on slider change, only on mouseup
     // let i = document.querySelector('input');
