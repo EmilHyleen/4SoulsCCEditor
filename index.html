@@ -17,15 +17,14 @@
 <body>
     <section id="left">
         <div id="selected-card-type">
-            <canvas id="canvas" style="border: 1px solid red;"></canvas>
+            <canvas id="canvas"></canvas>
         </div>
     </section>
     <section id="right">
-
         <div class="card-type">
-            <label for="card-type">Card Type</label>
-            <select id="card-type-selector" name="card-type">
-                <option value="character">Character</option>
+            <label for="card-type-selector">Card Type</label>
+            <select id="card-type-selector" name="card-type-selector">
+                <option value="character" selected="selected">Character</option>
                 <option value="monster" disabled>Monster</option>
                 <option value="boss" disabled>Boss</option>
                 <option value="loot" disabled>Loot</option>
@@ -38,18 +37,36 @@
             <input type="text" name="card-name" id="card-name" value="ISAAC" maxlength="32">
         </div>
         <br>
+        <div class="card-background">
+            <label for="card-background-selector">Background Art</label>
+            <select id="card-background-selector" name="card-background-selector">
+                <option value="1" selected="selected">Default</option>
+                <option value="2" >Arcade</option>
+                <option value="3" >Closet</option>
+                <option value="4" >Corpse</option>
+                <option value="5" >Cursed</option>
+                <option value="6" >Hell</option>
+                <option value="7" >Mines</option>
+                <option value="8" >Tainted</option>
+                <option value="0" >None</option>
+            </select>
+        </div>
+        <br>
         <div class="card-image">
             <label>Image File:</label><br/>
             <input type="file" id="imageLoader" name="imageLoader"/>
             <br>
             <label for="scaleSlider">Scale</label>
             <input type="range" min="1" max="200" value="100" class="scaleSlider" id="scaleSlider">
+            <!-- <br> -->
+            <!-- <label for="rotationSlider">Rotate</label>
+            <input type="range" min="-360" max="360" value="0" class="rotationSlider" id="rotationSlider"> -->
             <br>
             <label for="alignXSlider">Align X</label>
-            <input type="range" min="-300" max="300" value="0" class="alignXSlider" id="alignXSlider">
+            <input type="range" class="alignXSlider" id="alignXSlider">
             <br>
             <label for="alignYSlider">Align Y</label>
-            <input type="range" min="-300" max="300" value="0" class="alignYSlider" id="alignYSlider">
+            <input type="range" class="alignYSlider" id="alignYSlider">
             <br>
             <label for="center-image-check-x">Center Image X</label>
             <input type="checkbox" name="center-image-check-x" id="center-image-check-x" checked>
@@ -81,6 +98,9 @@
             
             <label for="default-effect-check" >Default?</label>
             <input type="checkbox" name="default-effect-check" id="default-effect-check" checked>
+            <br>
+            <label for="tappable-effect-check" >Tappable?</label>
+            <input type="checkbox" name="tappable-effect-check" id="tappable-effect-check" checked>
         </div>
         <br>
         <div class="eternal-name">

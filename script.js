@@ -52,11 +52,22 @@ function LoadAndDrawImage(url)
 const Character_UI = LoadAndDrawImageScaled("assets/character/Blank_Character.png");
 const Eternal_Dash = LoadAndDrawImageScaled("assets/character/Eternal_Separator.png");
 const Tap = LoadImage("assets/other/Tap.png");
+const BackgroundPresets = [
+    LoadImage("assets/backgrounds/Req_Character_Default.png"),
+    LoadImage("assets/backgrounds/Req_Character_Arcade.png"),
+    LoadImage("assets/backgrounds/Req_Character_Closet.png"),
+    LoadImage("assets/backgrounds/Req_Character_Corpse.png"),
+    LoadImage("assets/backgrounds/Req_Character_Cursed.png"),
+    LoadImage("assets/backgrounds/Req_Character_Hell.png"),
+    LoadImage("assets/backgrounds/Req_Character_Mines.png"),
+    LoadImage("assets/backgrounds/Req_Character_Tainted.png")
+];
 
+var backgroundImage = null;
 var customImage = LoadImage("isaac.png");
+
 var imageLoader = document.getElementById('imageLoader');
     imageLoader.addEventListener('change', HandleImage, false);
-
 function HandleImage(e)
 {
     var reader = new FileReader();
@@ -72,7 +83,14 @@ function DrawInternal()
     var ctx = Canvas.getContext("2d");
     ctx.clearRect(0, 0, CanvasWidth, CanvasHeight);
 
-    // custom image
+    // background
+    const SelectedBGPreset = parseInt(document.getElementById('card-background-selector').value);
+    if (SelectedBGPreset != 0)
+    {
+        ctx.drawImage(backgroundImage, 0, 0, CanvasWidth, CanvasHeight);
+    }
+
+    // custom image scaling
     const IsScaleToCanvas = document.getElementById('scale-to-canvas-check').checked;
 
     var scaleX = customImage.width;
@@ -90,10 +108,19 @@ function DrawInternal()
         scaleY *= ScaleMulti;
     }
 
+    // custom image rotation
+    // const rotDeg = document.getElementById('rotationSlider').value;
+    // context.save();
+    // context.translate(canvas.width/2,canvas.height/2);
+    // context.rotate(rotDeg * Math.PI/180);
+
+    // custom image alignment
     var alignX = document.getElementById('alignXSlider').value;
     var alignY = document.getElementById('alignYSlider').value;
 
+    // draw custom image
     ctx.drawImage(customImage, alignX, alignY, scaleX, scaleY);
+    // context.restore();
 
     // card UI
     ctx.drawImage(Character_UI, 0, 0, CanvasWidth, CanvasHeight);
@@ -102,7 +129,11 @@ function DrawInternal()
     ctx.drawImage(Eternal_Dash, 0, 30, CanvasWidth, CanvasHeight);
 
     // tap
-    ctx.drawImage(Tap, 30, 650, CanvasWidth / 7, CanvasHeight / 10);
+    const IsTappable = document.getElementById('tappable-effect-check').checked;
+    if (IsTappable)
+    {
+        ctx.drawImage(Tap, 30, 650, CanvasWidth / 7, CanvasHeight / 10);
+    }
 
     // card name
     var cardname = document.getElementById('card-name').value;
@@ -143,6 +174,13 @@ function DrawInternal()
 
 function UpdateInternal()
 {
+    // background image
+    const SelectedBGPreset = parseInt(document.getElementById('card-background-selector').value);
+    if (SelectedBGPreset != 0)
+    {
+        backgroundImage = BackgroundPresets[SelectedBGPreset - 1];
+    }
+
     // custom image
     const IsScaleToCanvas = document.getElementById('scale-to-canvas-check').checked;
     const IsCenterImageX = document.getElementById('center-image-check-x').checked;
@@ -153,9 +191,18 @@ function UpdateInternal()
     document.getElementById('alignYSlider').disabled = IsCenterImageY;
 
     const ScaleMulti = document.getElementById('scaleSlider').value / 100;
+    
+    const xSliderMin = 0 - (customImage.width * ScaleMulti);
+    const xSliderMax = CanvasWidth + (customImage.width * ScaleMulti) / 2;
+    const ySliderMin = 0 - (customImage.height * ScaleMulti);
+    const ySliderMax = CanvasHeight + (customImage.height * ScaleMulti) / 2;
+    this.document.getElementById("alignXSlider").setAttribute("min", xSliderMin);
+    this.document.getElementById("alignXSlider").setAttribute("max", xSliderMax);
+    this.document.getElementById("alignYSlider").setAttribute("min", ySliderMin);
+    this.document.getElementById("alignYSlider").setAttribute("max", ySliderMax);
+    
     if (IsCenterImageX)
     {
-
         var centerX = (CanvasWidth / 2) - ((customImage.width * ScaleMulti) / 2);
 
         document.getElementById('alignXSlider').value = centerX;
@@ -206,9 +253,6 @@ window.onload=function()
     {
         UpdateInternal();
     }
-    window.addEventListener("keyup", Update, true);
-    window.addEventListener("keypress", Update, true);
-    window.addEventListener("mouseup", Update, true);
     window.addEventListener("input", Update, true);
     Update();
 
@@ -216,18 +260,9 @@ window.onload=function()
     {
         DrawInternal();
     }
-    window.addEventListener("keyup", Draw, true);
-    window.addEventListener("keypress", Draw, true);
-    window.addEventListener("mouseup", Draw, true);
     window.addEventListener("input", Draw, true);
 
-    // FIXME: canvas is not updating on slider change, only on mouseup
-    // let i = document.querySelector('input');
-    // i.addEventListener('input', Draw, false);
-
     Draw();
-
-    
 }
 
 function PercentToCanvasWidth(percent)

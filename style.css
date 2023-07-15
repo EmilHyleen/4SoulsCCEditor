@@ -24,7 +24,6 @@ body
 
 #left
 {
-    /* background-image: url("assets/4soulsbg-3.png"); */
     background: black;
 
     height: 100vh;
@@ -49,4 +48,9 @@ body
 .character-effect input
 {
     width: 15rem;
+}
+
+#card-background-selector, option, input
+{
+    color:black;
 }
