@@ -192,6 +192,8 @@ function UpdateInternal()
 
     const ScaleMulti = document.getElementById('scaleSlider').value / 100;
     
+    document.getElementById('scaleNumber').innerHTML = Math.floor(document.getElementById('scaleSlider').value);
+
     const xSliderMin = 0 - (customImage.width * ScaleMulti);
     const xSliderMax = CanvasWidth + (customImage.width * ScaleMulti) / 2;
     const ySliderMin = 0 - (customImage.height * ScaleMulti);
@@ -213,6 +215,9 @@ function UpdateInternal()
         
         document.getElementById('alignYSlider').value = centerY;
     }
+
+    document.getElementById('alignXNumber').innerHTML = Math.floor(document.getElementById('alignXSlider').value);
+    document.getElementById('alignYNumber').innerHTML = Math.floor(document.getElementById('alignYSlider').value);
 
     // character effect
     var defaultEffect = [

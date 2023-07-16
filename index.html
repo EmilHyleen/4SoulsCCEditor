@@ -24,11 +24,13 @@
         <div class="card-type">
             <label for="card-type-selector">Card Type</label>
             <select id="card-type-selector" name="card-type-selector">
-                <option value="character" selected="selected">Character</option>
-                <option value="monster" disabled>Monster</option>
-                <option value="boss" disabled>Boss</option>
-                <option value="loot" disabled>Loot</option>
-                <option value="treasure" disabled>Treasure</option>
+                <option value="1" selected="selected">Character</option>
+                <option value="2" disabled>Eternal</option>
+                <option value="3">Monster</option>
+                <option value="4" disabled>Loot</option>
+                <option value="5" disabled>Treasure</option>
+                <option value="5" disabled>Room</option>
+                <option value="5" disabled>Room</option>
             </select>
         </div>
         <br>
@@ -56,17 +58,26 @@
             <label>Image File:</label><br/>
             <input type="file" id="imageLoader" name="imageLoader"/>
             <br>
-            <label for="scaleSlider">Scale</label>
-            <input type="range" min="1" max="200" value="100" class="scaleSlider" id="scaleSlider">
+            <div class="imageScale">
+                <label for="scaleSlider">Scale</label>
+                <input type="range" min="1" max="200" value="20" class="scaleSlider" id="scaleSlider">
+                <p class="scaleNumber" id="scaleNumber"></p>
+            </div>
             <!-- <br> -->
             <!-- <label for="rotationSlider">Rotate</label>
             <input type="range" min="-360" max="360" value="0" class="rotationSlider" id="rotationSlider"> -->
             <br>
-            <label for="alignXSlider">Align X</label>
-            <input type="range" class="alignXSlider" id="alignXSlider">
+            <div class="imageAlignX">
+                <label for="alignXSlider">Align X</label>
+                <input type="range" class="alignXSlider" id="alignXSlider">
+                <p class="alignXNumber" id="alignXNumber"></p>
+            </div>
             <br>
-            <label for="alignYSlider">Align Y</label>
-            <input type="range" class="alignYSlider" id="alignYSlider">
+            <div class="imageAlignX">
+                <label for="alignYSlider">Align Y</label>
+                <input type="range" class="alignYSlider" id="alignYSlider">
+                <p class="alignYNumber" id="alignYNumber"></p>
+            </div>
             <br>
             <label for="center-image-check-x">Center Image X</label>
             <input type="checkbox" name="center-image-check-x" id="center-image-check-x" checked>
