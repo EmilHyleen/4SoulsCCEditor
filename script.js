@@ -126,13 +126,13 @@ function DrawInternal()
     ctx.drawImage(Character_UI, 0, 0, CanvasWidth, CanvasHeight);
 
     // eternal separator dash
-    ctx.drawImage(Eternal_Dash, 0, 30, CanvasWidth, CanvasHeight);
+    ctx.drawImage(Eternal_Dash, 0, CanvasHeight / 35, CanvasWidth, CanvasHeight);
 
     // tap
     const IsTappable = document.getElementById('tappable-effect-check').checked;
     if (IsTappable)
     {
-        ctx.drawImage(Tap, 30, 650, CanvasWidth / 7, CanvasHeight / 10);
+        ctx.drawImage(Tap, CanvasWidth / 40, CanvasHeight / 1.55, CanvasWidth / 7, CanvasHeight / 10);
     }
 
     // card name
